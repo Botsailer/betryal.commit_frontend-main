@@ -9,7 +9,7 @@ import useSocket from "./server/usesocket";
 function App() {
   useSocket();
   const [user, setUser] = useState(null);
-  const [emailVerified, setEmailVerified] = useState(false); // Add this state
+  const [emailVerified, setEmailVerified] = useState(false);
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (user) => {

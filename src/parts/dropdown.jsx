@@ -7,7 +7,7 @@ import { setserv } from "../server/socket";
 const DropdownMenu = () => {
   setserv("https://bertrylcommit-back.botsailer1.repl.co/");
   const [serverResponsedata, imageData] = useSocket()
-
+  const [, , isSocketConnected] = useSocket();
   const [selectedOption, setSelectedOption] = useState('');
   const [image, setImage] = useState('');
   const [phoneNumber, setPhoneNumber] = useState('');
@@ -84,11 +84,9 @@ const handleServerlinkChange = (e) => {
   const handleMessageChange = (e) => {
     setMessage(e.target.value);
   }
-
   const handlePhoneNumberChange = (e) => {
     setPhoneNumber(e.target.value);
   }
-
   const handleImageUpload = (e) => {
     const file = e.target.files[0];
     if (file) {
@@ -102,9 +100,11 @@ const handleServerlinkChange = (e) => {
       alert('Please select a file.');
     }
   };
-
   return (
     <>
+     <span>{isSocketConnected ?(<span id='connection' >Connected to socket server</span>):(<span>Not connected to socket server</span>
+              )}
+            </span>
     <div className='split-screen'>
       <div className='split-item'>
     <div id='mainback'>
@@ -193,7 +193,7 @@ const handleServerlinkChange = (e) => {
         <div>
           <button onClick={handleSubmission}>Submit</button>
         </div>
-      )};
+      )}
 </div>
 </div>
 <div className='split-item'>
