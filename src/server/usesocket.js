@@ -1,11 +1,7 @@
 import { useEffect,useState } from 'react';
 import socket from './socket';
-import {roomid} from '../components/LoginRegister';
-
-
-
 function useSocket() {
-  
+
   const [serverResponse, setserverResponse] = useState('');
   const [imageData, setimageData] = useState('');
   const [isSocketConnected, setIsconnected] = useState(false);
@@ -13,8 +9,7 @@ function useSocket() {
   useEffect(() => {
     socket.on('connect', () => {
       console.log('Connected to Socket.IO server');
-        socket.emit('joinRoom', roomid);
-        setIsconnected(true);
+       
     });
     socket.on('disconnect', () => {
       setIsconnected(false);
@@ -65,6 +60,6 @@ function useSocket() {
         }
       });
   } );
-  return [serverResponse , imageData , isSocketConnected];
+  return [serverResponse , imageData , isSocketConnected, setIsconnected];
 }
 export default useSocket;

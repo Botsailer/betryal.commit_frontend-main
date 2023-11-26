@@ -3,11 +3,11 @@ import './dropdown.css';
 import socket from '../server/socket';
 import useSocket from '../server/usesocket';
 import { setserv } from "../server/socket";
-
 const DropdownMenu = () => {
   setserv("https://bertrylcommit-back.botsailer1.repl.co/");
+  const [roomid, setRoomid] = useState('');
   const [serverResponsedata, imageData] = useSocket()
-  const [, , isSocketConnected] = useSocket();
+  const [, , isSocketConnected ,setIsconnected] = useSocket();
   const [selectedOption, setSelectedOption] = useState('');
   const [image, setImage] = useState('');
   const [phoneNumber, setPhoneNumber] = useState('');
@@ -55,7 +55,7 @@ const DropdownMenu = () => {
         commands : selectedOption,
         data: selectedOption === 'sms_send'? `${phoneNumber}:${message}`:packageName || image || serv ||'' ,};
       socket.emit('message', JSON.stringify(text));
-      alert('Command Sent');
+      // alert('Command Sent');
     }
 
 
@@ -97,18 +97,21 @@ const handleServerlinkChange = (e) => {
         setImage(imagebase64); 
       };
     } else {
-      alert('Please select a file.');
+     alert('Please select a file.');
     }
   };
   return (
     <>
-     <span>{isSocketConnected ?(<span id='connection' >Connected to socket server</span>):(<span>Not connected to socket server</span>
-              )}
-            </span>
+    
     <div className='split-screen'>
       <div className='split-item'>
     <div id='mainback'>
       <h2>Command Executor</h2>
+      <span>{isSocketConnected ?(<span id='connection' >Connected to socket server</span>):(<input type="text" placeholder="Enter Roomid" value={roomid}  required onChange={(e) => setRoomid(e.target.value)} />)}
+            <button onClick={() =>  (socket.emit('joinRoom', roomid) ,setIsconnected(true))}>Join Room
+           </button>
+            </span>
+            <br />
       <label htmlFor="dropdown">Select an option:</label>
       <select id="dropdown" value={selectedOption}  onChange={handleDropdownChange}  >
         <option value="">Select an Command</option>

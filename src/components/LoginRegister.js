@@ -11,7 +11,7 @@ const LoginRegister = () => {
   const [email, setEmail ] = useState('');
   const [name, setName ] = useState('');
   const [password, setPassword ] = useState('');
-  const [roomid, setRoomid] = useState('');
+
 
   const handleSignUp = async (e) => {
     e.preventDefault();
@@ -103,7 +103,7 @@ try{
           <h1>Login</h1>
           <input className="inputz" type="email" placeholder="EMAIL" value={email} required onChange={(e) => setEmail(e.target.value)} />
           <input className="inputz" type="password" placeholder="PASSWORD" value={password}  required onChange={(e) => setPassword(e.target.value)} />
-          <input type="text" placeholder="Enter Roomid" value={roomid}  required onChange={(e) => setRoomid(e.target.value)} />
+     
           <button  id="forgotPassword" onClick={handleForgotPassword}>forgotPassword?</button>
           <button type="submit">LOGIN</button>
         </form>
